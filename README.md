@@ -1,117 +1,120 @@
 <div align="center">
 
-# 视频全屏助手
+# Video Fullscreen Helper
 
-**Video Fullscreen Helper** —— 把当前标签页里的视频强制铺满窗口，不依赖站点自带的网页全屏按钮
+Force the video in the current tab to fill the window — no reliance on the site's own web-fullscreen button
 
 ![Chrome](https://img.shields.io/badge/Chrome-%E2%89%A5110-4285F4?logo=googlechrome&logoColor=white)
 ![Manifest](https://img.shields.io/badge/Manifest-V3-34A853)
-![i18n](https://img.shields.io/badge/%E7%95%8C%E9%9D%A2-%E4%B8%AD%E6%96%87%20%7C%20English-8B5CF6)
+![i18n](https://img.shields.io/badge/UI-English%20%7C%20%E4%B8%AD%E6%96%87-8B5CF6)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-**简体中文** · [English](./README.en.md)
+**English** · [简体中文](./README.zh-CN.md)
 
 </div>
 
 ---
 
-很多视频站点自带的"网页全屏"根本没用，只剩真全屏可用。这个扩展通过直接改写页面样式，把视频强制铺满浏览器窗口：
+Many video sites ship a broken "web fullscreen" button, leaving only real fullscreen usable. This extension rewrites the page styles directly and forces the video to fill the browser window:
 
-| 模式 | 效果 |
+| Mode | Effect |
 | --- | --- |
-| 🖥️ **网页全屏** | 视频占满整个浏览器窗口，浏览器保持窗口状态（能看到任务栏和其他窗口） |
-| 📺 **整个全屏** | 浏览器进入全屏模式，视频占满整个屏幕 |
+| 🖥️ **Web fullscreen** | The video fills the entire browser window, while the browser itself stays windowed (taskbar and other windows remain visible) |
+| 📺 **Full fullscreen** | The browser enters fullscreen mode and the video fills the whole screen |
 
-## ✨ 特性
+## ✨ Features
 
-- **绕过站点失效的网页全屏** —— 直接给播放器容器 / `<video>` / 跨域 `iframe` 强制内联样式，任何站点都能生效
-- **防遮挡** —— 自动检测并处理顶栏、侧栏、悬浮挂件、弹窗等覆盖物（层叠上下文中和 → 精确隐藏遮挡元素 → 顶层挂载，逐级升级）
-- **跨域 iframe 播放器支持** —— 顶层铺 iframe、子层铺视频，双层配合
-- **无痕还原** —— 进入前对所有被修改的样式和 DOM 位置做快照，退出时逐条还原
-- **自适应站点变化** —— `MutationObserver` 监听站点改写样式、更换视频元素（如切换清晰度）、中途弹出的浮层
-- **中英双语界面** —— 按浏览器语言自动切换，非支持语言回落英文
+- **Bypasses broken site web-fullscreen** — injects forced inline styles into the player container / `<video>` / cross-origin `iframe`; works on any site
+- **Occlusion handling** — detects and deals with headers, sidebars, floating widgets and dialogs covering the video (stacking-context neutralization → precise occluder hiding → top-layer remount, escalating step by step)
+- **Cross-origin iframe players** — the top frame fills the iframe while the sub-frame fills the video, working in tandem
+- **Traceless restore** — snapshots every modified style and DOM position on entry, restores them one by one on exit
+- **Adapts to site changes** — a `MutationObserver` watches for style rewrites, video element replacement (e.g. quality switching) and overlays popping up mid-playback
+- **Bilingual UI** — follows the browser language, falling back to English for unsupported languages
 
-## 📦 安装
+## 📦 Installation
 
-> 本扩展未上架 Chrome 应用商店，以开发者模式加载本地使用。
+> The extension is not on the Chrome Web Store; load it locally in developer mode.
 
-1. 打开 `chrome://extensions/`
-2. 打开右上角 **开发者模式**
-3. 点击 **加载已解压的扩展程序**，选择本项目根目录
-4. （可选）如需在本地 `file://` 视频文件上使用，在扩展详情页开启 **允许访问文件网址**
+1. Open `chrome://extensions/`
+2. Enable **Developer mode** (top right)
+3. Click **Load unpacked** and select the project root directory
+4. (Optional) To use it on local `file://` videos, enable **Allow access to file URLs** on the extension details page
 
-## 🚀 使用
+## 🚀 Usage
 
-### 基本操作
+### Basics
 
-- 点击工具栏图标，选择 **网页全屏** 或 **整个全屏**；动作成功后弹窗自动关闭（页面内会出现"已网页全屏 · Esc 退出"提示气泡）
-- 页面内按 <kbd>Esc</kbd> 退出；整个全屏模式下退出时会把浏览器窗口一并还原为之前的状态（普通/最大化）
-- 也可以重新打开弹窗点击退出按钮；已激活时点击另一个模式按钮可直接切换
+- Click the toolbar icon and choose **Web fullscreen** or **Full fullscreen**; the popup closes automatically on success (an in-page toast shows "Web fullscreen · Esc to exit")
+- Press <kbd>Esc</kbd> in the page to exit; in full-fullscreen mode the browser window is also restored to its previous state (normal/maximized)
+- You can also reopen the popup and click the exit button; while active, clicking the other mode's button switches modes directly
 
-### 快捷键
+### Keyboard shortcuts
 
-默认不绑定。需要的话到 `chrome://extensions/shortcuts` 为 **网页全屏** / **整个全屏** 自行设置。
+None are bound by default. To set them, go to `chrome://extensions/shortcuts` and assign keys for **Web fullscreen** / **Full fullscreen**.
 
-### 选项
+### Options
 
-| 选项 | 说明 | 默认 |
+| Option | Description | Default |
 | --- | --- | --- |
-| 显示原生控制条 | 直接改 `<video>` 元素时（容器方案失败的回退），显示浏览器原生控制条，弥补站点控制条被盖住的问题 | 开 |
-| 拉伸铺满窗口 | `object-fit: fill`，视频变形铺满窗口；关闭则 `contain`（保留比例，可能留黑边） | 关 |
+| Show native controls | When targeting the `<video>` element directly (fallback when the container approach fails), show the browser's native controls to compensate for the covered site controls | On |
+| Stretch to fill | `object-fit: fill` — the video stretches to fill the window; off means `contain` (keeps aspect ratio, may letterbox) | Off |
 
-## 🔧 工作原理
+## 🔧 How it works
 
 ```text
 ┌─ background.js (service worker) ──────────────────────────┐
-│ · 快捷键命令分发                                          │
-│ · 整个全屏：chrome.windows.update 全屏切换 + 原状态还原    │
-│ · Esc / F11 自发退出的跨 frame 同步                       │
+│ · Dispatches keyboard commands                            │
+│ · Full fullscreen: chrome.windows.update + state restore  │
+│ · Cross-frame sync on user-initiated exit (Esc / F11)     │
 └──────────────┬────────────────────────────────────────────┘
-               │ chrome.tabs.sendMessage（广播到所有 frame）
+               │ chrome.tabs.sendMessage (broadcast to all frames)
 ┌──────────────▼────────────────────────────────────────────┐
-│ content.js（每个 frame 一份）                               │
-│ · 目标选择：播放器容器 → <video> → 最大 iframe              │
-│ · 强制样式：position:fixed + 100vw/100vh + 最大 z-index    │
-│ · 防遮挡升级阶梯（每步后用 elementsFromPoint 采样复测）     │
-│ · 快照与还原 / MutationObserver 重申 / shadow DOM 穿透     │
+│ content.js (one per frame)                                 │
+│ · Target picking: player container → <video> → largest     │
+│   iframe                                                   │
+│ · Forced styles: position:fixed + 100vw/100vh + max z      │
+│ · Anti-occlusion ladder (re-checked via elementsFromPoint  │
+│   sampling after each step)                                │
+│ · Snapshot & restore / MutationObserver reassert / shadow  │
+│   DOM traversal                                            │
 └───────────────────────────────────────────────────────────┘
 ```
 
-防遮挡的升级阶梯（`z-index` 无法穿越层叠上下文，这是"视频不在顶层"问题的根源）：
+The anti-occlusion ladder (`z-index` cannot cross stacking contexts — the root cause of "the video isn't on the top layer"):
 
-1. **中和祖先层叠上下文** —— 祖先带 `opacity` / `contain` / `transform` / `position:relative + z-index` 等都会把视频困在低层级，逐层拆掉
-2. **精确隐藏遮挡元素** —— 用 `elementsFromPoint` 在 12 个采样点找出真正压在最上层的外来元素，命中什么藏什么
-3. **广谱隐藏浮层** —— fixed/sticky、高 z-index 的 absolute、top-layer 的 dialog/popover
-4. **顶层挂载** —— 把目标 DOM 移到独立的全屏挂载点，一步跳出所有祖先上下文（iframe 除外——移动会销毁 browsing context 导致整页重载）
+1. **Neutralize ancestor stacking contexts** — ancestors with `opacity` / `contain` / `transform` / `position:relative + z-index` etc. trap the video in a low layer; unmake them one by one
+2. **Precisely hide occluders** — use `elementsFromPoint` at 12 sample points to find the foreign elements actually painting on top, and hide exactly those
+3. **Broadly hide overlays** — fixed/sticky elements, high z-index absolutes, top-layer dialogs/popovers
+4. **Top-layer remount** — move the target's DOM into a dedicated fullscreen mount host, escaping all ancestor contexts in one step (except iframes — moving them destroys the browsing context and reloads the page)
 
-## 📁 目录结构
+## 📁 Project layout
 
 ```text
 .
-├── manifest.json          # MV3 清单（commands、content_scripts、i18n）
-├── background.js          # service worker：窗口全屏、快捷键、状态同步
-├── content.js             # 内容脚本：目标选择、样式填充、防遮挡、还原
-├── popup.html/js/css      # 工具栏弹窗
-├── _locales/              # en / zh_CN 语言包
-├── icons/                 # 扩展图标
-└── tools/gen-icons.ps1    # 图标生成脚本（PowerShell）
+├── manifest.json          # MV3 manifest (commands, content_scripts, i18n)
+├── background.js          # service worker: window fullscreen, shortcuts, sync
+├── content.js             # content script: target picking, fill, anti-occlusion
+├── popup.html/js/css      # toolbar popup
+├── _locales/              # en / zh_CN message catalogs
+├── icons/                 # extension icons
+└── tools/gen-icons.ps1    # icon generation script (PowerShell)
 ```
 
-## ⚠️ 已知限制
+## ⚠️ Known limitations
 
-- DRM 播放器渲染到 canvas 的站点（`<video>` 只是隐藏数据源）无法处理
-- 直接改 `<video>` 元素时，站点控制条会被盖住——用"原生控制条"选项或站点全局快捷键（空格、方向键等）
-- 极少数站点用 JS 每帧重写布局，可能与扩展互相拉扯（有重申机制，一般能赢）
-- `pointer-events: none` 且完全透明的覆盖层无法被检测到
+- DRM players rendering to a canvas (with the `<video>` as a hidden data source) cannot be handled
+- When targeting the `<video>` element directly, the site's own control bar gets covered — use the "native controls" option or the site's global shortcuts (space, arrow keys, etc.)
+- A few sites rewrite layout with JS every frame and may fight the extension (the reassert mechanism usually wins)
+- Fully transparent overlays with `pointer-events: none` cannot be detected
 
-## 🛠️ 开发
+## 🛠️ Development
 
-重新生成图标（修改 `tools/gen-icons.ps1` 后执行）：
+Regenerate the icons (after editing `tools/gen-icons.ps1`):
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/gen-icons.ps1
 ```
 
-## 📄 许可证
+## 📄 License
 
 [MIT](./LICENSE)

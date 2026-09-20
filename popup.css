@@ -1,0 +1,109 @@
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  width: 300px;
+  margin: 0;
+  font: 13px/1.5 system-ui, "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #0f172a;
+  background: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { color: #e2e8f0; background: #1e293b; }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 6px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 14px;
+}
+
+#dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+#status {
+  margin: 0 14px 10px;
+  min-height: 1.5em;
+  color: #64748b;
+}
+
+button.act {
+  display: block;
+  width: calc(100% - 28px);
+  margin: 0 14px 8px;
+  padding: 9px 12px;
+  text-align: left;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+button.act b {
+  display: block;
+  font-size: 14px;
+}
+
+button.act small {
+  color: #64748b;
+}
+
+button.act:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+button.act.on {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #fff;
+}
+
+button.act.on small {
+  color: #dcfce7;
+}
+
+button.act:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.opts {
+  padding: 2px 14px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.opts label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.hint {
+  margin: 0;
+  padding: 8px 14px 12px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+#unsupported {
+  padding: 16px 14px 18px;
+  color: #b91c1c;
+}

@@ -1,0 +1,33 @@
+{
+  "extName": { "message": "视频全屏助手" },
+  "extDesc": { "message": "把当前标签页的视频铺满窗口（网页全屏），或让浏览器进入全屏并铺满（整个全屏）。适用于站点自带网页全屏失效的情况。" },
+  "cmdWebDesc": { "message": "网页全屏：视频占满当前窗口" },
+  "cmdFullDesc": { "message": "整个全屏：浏览器进入全屏并铺满" },
+  "popupTitle": { "message": "视频全屏助手" },
+  "running": { "message": "运行中" },
+  "unsupported": { "message": "无法在此页面运行（浏览器内部页面、应用商店等不受支持）。" },
+  "statusDetecting": { "message": "检测中…" },
+  "statusVideos": {
+    "message": "检测到 $COUNT$ 个视频",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "statusNoVideo": { "message": "本页未直接检测到视频（可能在嵌入框架中，仍可尝试）" },
+  "statusActiveWeb": { "message": "已网页全屏" },
+  "statusActiveFull": { "message": "已整个全屏" },
+  "statusExit": { "message": "按 Esc 或再点按钮退出" },
+  "targetContainer": { "message": "播放器容器" },
+  "targetVideo": { "message": "视频元素" },
+  "targetIframe": { "message": "嵌入框架" },
+  "btnWeb": { "message": "网页全屏" },
+  "btnWebActive": { "message": "退出网页全屏" },
+  "btnWebSub": { "message": "视频占满当前窗口，浏览器不全屏" },
+  "btnFull": { "message": "整个全屏" },
+  "btnFullActive": { "message": "退出整个全屏" },
+  "btnFullSub": { "message": "浏览器进入全屏，视频占满整个屏幕" },
+  "optNative": { "message": "显示原生控制条（直接改视频时）" },
+  "optFill": { "message": "拉伸铺满窗口（可能变形）" },
+  "hintShortcuts": { "message": "快捷键默认未设置，可在 chrome://extensions/shortcuts 自行绑定" },
+  "hintEsc": { "message": "网页全屏 / 整个全屏 · 页面内按 Esc 退出" },
+  "hintWebFull": { "message": "已网页全屏 · Esc 退出" },
+  "hintFullFull": { "message": "已整个全屏 · Esc 退出" }
+}

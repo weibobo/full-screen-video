@@ -1,0 +1,33 @@
+{
+  "extName": { "message": "Video Fullscreen Helper" },
+  "extDesc": { "message": "Fill the current tab's video into the browser window (web fullscreen), or make the browser go fullscreen with the video filling the screen. For sites whose built-in web fullscreen is broken." },
+  "cmdWebDesc": { "message": "Web fullscreen: video fills the current window" },
+  "cmdFullDesc": { "message": "Fullscreen: browser enters fullscreen and the video fills it" },
+  "popupTitle": { "message": "Video Fullscreen Helper" },
+  "running": { "message": "Active" },
+  "unsupported": { "message": "Cannot run on this page (browser internal pages and the Web Store are not supported)." },
+  "statusDetecting": { "message": "Detecting…" },
+  "statusVideos": {
+    "message": "Found $COUNT$ video(s)",
+    "placeholders": { "count": { "content": "$1" } }
+  },
+  "statusNoVideo": { "message": "No video found on this page (it may be inside an embedded frame — you can still try)" },
+  "statusActiveWeb": { "message": "Web fullscreen active" },
+  "statusActiveFull": { "message": "Fullscreen active" },
+  "statusExit": { "message": "Press Esc or click the button again to exit" },
+  "targetContainer": { "message": "player container" },
+  "targetVideo": { "message": "video element" },
+  "targetIframe": { "message": "embedded frame" },
+  "btnWeb": { "message": "Web fullscreen" },
+  "btnWebActive": { "message": "Exit web fullscreen" },
+  "btnWebSub": { "message": "Video fills the window; the browser stays windowed" },
+  "btnFull": { "message": "Fullscreen" },
+  "btnFullActive": { "message": "Exit fullscreen" },
+  "btnFullSub": { "message": "The browser enters fullscreen and the video fills the screen" },
+  "optNative": { "message": "Show native controls (when targeting the video directly)" },
+  "optFill": { "message": "Stretch to fill the window (may distort)" },
+  "hintShortcuts": { "message": "Shortcuts are unbound by default — set them at chrome://extensions/shortcuts" },
+  "hintEsc": { "message": "Web fullscreen / Fullscreen · Press Esc in the page to exit" },
+  "hintWebFull": { "message": "Web fullscreen · Esc to exit" },
+  "hintFullFull": { "message": "Fullscreen · Esc to exit" }
+}

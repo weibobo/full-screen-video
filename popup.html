@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title data-i18n="popupTitle"></title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1 data-i18n="popupTitle"></h1>
+    <span id="dot" data-i18n-title="running"></span>
+  </header>
+
+  <div id="unsupported" data-i18n="unsupported" hidden></div>
+
+  <div id="main">
+    <p id="status" data-i18n="statusDetecting"></p>
+
+    <button id="btn-web" class="act">
+      <b id="btn-web-label"></b>
+      <small data-i18n="btnWebSub"></small>
+    </button>
+
+    <button id="btn-full" class="act">
+      <b id="btn-full-label"></b>
+      <small data-i18n="btnFullSub"></small>
+    </button>
+
+    <div class="opts">
+      <label><input type="checkbox" id="opt-native"> <span data-i18n="optNative"></span></label>
+      <label><input type="checkbox" id="opt-fill"> <span data-i18n="optFill"></span></label>
+    </div>
+
+    <p class="hint">
+      <span data-i18n="hintShortcuts"></span><br>
+      <span data-i18n="hintEsc"></span>
+    </p>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

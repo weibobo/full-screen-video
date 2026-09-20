@@ -115,6 +115,14 @@ Regenerate the icons (after editing `tools/gen-icons.ps1`):
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/gen-icons.ps1
 ```
 
+Build the Chrome Web Store distribution zip (runtime files only, `file://` permission stripped) into `dist/`:
+
+```bash
+node tools/pack.js
+```
+
+Store listing copy (descriptions, permission justifications) lives in [`store/`](./store).
+
 ## 📄 License
 
 [MIT](./LICENSE)

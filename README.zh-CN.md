@@ -112,6 +112,14 @@
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/gen-icons.ps1
 ```
 
+打包 Chrome 应用商店分发 zip（只含运行时文件、去掉 `file://` 权限），输出到 `dist/`：
+
+```bash
+node tools/pack.js
+```
+
+商店文案（描述、权限用途说明等）在 [`store/`](./store) 目录。
+
 ## 📄 许可证
 
 [MIT](./LICENSE)

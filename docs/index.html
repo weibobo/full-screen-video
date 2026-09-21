@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Video Fullscreen Helper</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font: 16px/1.7 system-ui, "Segoe UI", "Microsoft YaHei", sans-serif;
+    color: #1f2937;
+    background: #f8fafc;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 24px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  .tagline { color: #64748b; font-size: 14px; }
+  nav { margin: 0 0 8px; font-size: 14px; }
+  nav a { color: #2563eb; text-decoration: none; margin-right: 12px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; padding-top: 16px; border-top: 1px solid #e2e8f0; }
+  h3 { font-size: 16px; margin: 20px 0 4px; }
+  p, li { color: #334155; }
+  .updated { color: #64748b; font-size: 14px; }
+  .summary {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 16px 0;
+  }
+  a { color: #2563eb; }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e2e8f0; background: #0f172a; }
+    header, h2 { border-color: #334155; }
+    p, li { color: #cbd5e1; }
+    .tagline, .updated { color: #94a3b8; }
+    .summary { background: #052e21; border-color: #065f46; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Video Fullscreen Helper <span style="font-weight:400;font-size:16px;color:#64748b">/ 视频全屏助手</span></h1>
+    <p class="tagline">Chrome extension — force the video in the current tab to fill the window</p>
+    <nav>
+      <a href="#en">English</a>
+      <a href="#zh">中文（简体）</a>
+      <a href="https://github.com/weibobo/full-screen-video">GitHub</a>
+    </nav>
+    <p class="updated">Effective date: 2026-09-21</p>
+  </header>
+
+  <div class="summary">
+    <p><strong>Short answer:</strong> this extension does not collect, transmit, share, or sell any personal data. All processing happens locally in your browser, on the page where you invoke it.</p>
+  </div>
+
+  <h2 id="en">English</h2>
+
+  <h3>What the extension does</h3>
+  <p>Video Fullscreen Helper lets you force the video playing in the current tab to fill the browser window (web fullscreen) or the whole screen (browser fullscreen). It works by applying style changes to the page — nothing more.</p>
+
+  <h3>Data we collect</h3>
+  <p><strong>None.</strong> The extension does not collect, store, transmit, share, or sell any personal information or user data. Specifically, it does <strong>not</strong> collect:</p>
+  <ul>
+    <li>personally identifiable information of any kind</li>
+    <li>browsing history, URLs, or page content</li>
+    <li>video URLs, playback activity, or keystrokes</li>
+    <li>analytics, telemetry, or crash reports</li>
+  </ul>
+  <p>It contains no cookies, no trackers, no third-party scripts, and no remote code. The full source code is public and auditable on <a href="https://github.com/weibobo/full-screen-video">GitHub</a>.</p>
+
+  <h3>Local storage</h3>
+  <p>The extension stores exactly two UI preferences (whether to show native video controls, and whether to stretch the video) using <code>chrome.storage.local</code>. This data stays on your device, is never synced or uploaded, and can be removed at any time by removing the extension.</p>
+
+  <h3>Permissions</h3>
+  <ul>
+    <li><strong>Host access (http/https)</strong> — the content script must be able to run on any site where you play a video. It only locates the video/player element on the page where you invoke the extension and applies fullscreen styles.</li>
+    <li><strong>activeTab / scripting</strong> — used when you click the toolbar button or press the shortcut, to run the fullscreen command on the current tab.</li>
+    <li><strong>storage</strong> — stores the two UI preferences described above.</li>
+  </ul>
+
+  <h3>Changes to this policy</h3>
+  <p>If this policy ever changes, the updated version will be published on this page with a new effective date.</p>
+
+  <h3>Contact</h3>
+  <p>Questions or concerns: open an issue on <a href="https://github.com/weibobo/full-screen-video/issues">GitHub Issues</a>.</p>
+
+  <h2 id="zh">中文（简体）</h2>
+
+  <h3>这个扩展做什么</h3>
+  <p>视频全屏助手让你把当前标签页中播放的视频强制铺满浏览器窗口（网页全屏）或整个屏幕（整个全屏）。它通过向页面应用样式变更来工作——仅此而已。</p>
+
+  <h3>我们收集的数据</h3>
+  <p><strong>无。</strong>本扩展不收集、存储、传输、共享或出售任何个人信息或用户数据。具体来说，<strong>不会</strong>收集：</p>
+  <ul>
+    <li>任何形式的可识别个人身份的信息</li>
+    <li>浏览历史、网址或页面内容</li>
+    <li>视频地址、播放行为或按键</li>
+    <li>统计分析、遥测或崩溃报告</li>
+  </ul>
+  <p>它不包含 Cookie、跟踪器、第三方脚本和远程代码。完整源代码在 <a href="https://github.com/weibobo/full-screen-video">GitHub</a> 上公开，可自行审计。</p>
+
+  <h3>本地存储</h3>
+  <p>扩展仅使用 <code>chrome.storage.local</code> 存储两项界面偏好（是否显示原生控制条、是否拉伸铺满）。该数据只保存在你的设备上，绝不会同步或上传；移除扩展即可随时删除。</p>
+
+  <h3>权限说明</h3>
+  <ul>
+    <li><strong>主机权限（http/https）</strong>——内容脚本需要能够在任意播放视频的网站上运行。它只在你主动调用扩展的页面上定位视频/播放器元素并应用全屏样式。</li>
+    <li><strong>activeTab / scripting</strong>——在你点击工具栏按钮或按下快捷键时使用，用于在当前标签页上执行全屏指令。</li>
+    <li><strong>storage</strong>——存储上述两项界面偏好。</li>
+  </ul>
+
+  <h3>政策变更</h3>
+  <p>如本政策发生变更，更新版本将发布在本页面并注明新的生效日期。</p>
+
+  <h3>联系方式</h3>
+  <p>如有疑问，请在 <a href="https://github.com/weibobo/full-screen-video/issues">GitHub Issues</a> 提交。</p>
+</main>
+</body>
+</html>

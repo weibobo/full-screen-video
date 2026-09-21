@@ -39,7 +39,19 @@ for (const item of RUNTIME_FILES) {
   fs.cpSync(path.join(ROOT, item), path.join(STAGE, item), { recursive: true });
 }
 
-/* ---------- 2. 商店版 manifest 去掉 file:// 权限 ---------- */
+/* ---------- 2. CWS 上传校验：name ≤75、description ≤132 ---------- */
+/* （本地开发者模式加载不做这两项检查，只有商店上传会拦，打包时提前挡住） */
+
+for (const loc of fs.readdirSync(path.join(STAGE, '_locales'))) {
+  const msgs = JSON.parse(fs.readFileSync(path.join(STAGE, '_locales', loc, 'messages.json'), 'utf8'));
+  const nm = (msgs.extName && msgs.extName.message) || '';
+  const ds = (msgs.extDesc && msgs.extDesc.message) || '';
+  if (nm.length > 75) throw new Error(loc + ': extName too long (' + nm.length + ' > 75)');
+  if (ds.length > 132) throw new Error(loc + ': extDesc too long (' + ds.length + ' > 132)');
+  console.log('locale ' + loc + ': name ' + nm.length + '/75, description ' + ds.length + '/132');
+}
+
+/* ---------- 3. 商店版 manifest 去掉 file:// 权限 ---------- */
 
 const mfPath = path.join(STAGE, 'manifest.json');
 let raw = fs.readFileSync(mfPath, 'utf8');
@@ -48,7 +60,7 @@ if (raw.includes('file://')) throw new Error('manifest 中仍残留 file:// 权�
 const version = JSON.parse(raw).version;
 fs.writeFileSync(mfPath, raw, 'utf8'); // Node 写 UTF-8 无 BOM
 
-/* ---------- 3. 生成 zip（deflate） ---------- */
+/* ---------- 4. 生成 zip（deflate） ---------- */
 
 function crc32(buf) {
   if (!crc32.table) {

@@ -1,6 +1,6 @@
 {
   "extName": { "message": "Video Fullscreen Helper" },
-  "extDesc": { "message": "Fill the current tab's video into the browser window (web fullscreen), or make the browser go fullscreen with the video filling the screen. For sites whose built-in web fullscreen is broken." },
+  "extDesc": { "message": "Force the current tab's video to fill the browser window or the whole screen — even when the site's own web fullscreen is broken." },
   "cmdWebDesc": { "message": "Web fullscreen: video fills the current window" },
   "cmdFullDesc": { "message": "Fullscreen: browser enters fullscreen and the video fills it" },
   "popupTitle": { "message": "Video Fullscreen Helper" },

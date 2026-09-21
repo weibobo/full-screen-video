@@ -81,7 +81,8 @@ Stores the user's two interface preferences (show native controls, stretch to fi
 
 勾选/声明（均为"否"）：
 
-- [ ] I do not collect or use any user data *(勾选此项后无需隐私政策 URL)*
+- [ ] I do not collect or use any user data *(勾选此项后隐私政策为选填)*
+- Privacy policy URL（选填，已上线）: `https://weibobo.github.io/full-screen-video/`
 - Remote code: none — the extension executes only bundled code
 - Ads: no; Analytics: no; Data sold or transferred: no
 

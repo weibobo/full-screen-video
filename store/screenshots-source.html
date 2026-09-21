@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Video Fullscreen Helper screenshot source</title>
+  <style>
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html, body { width: 1280px; height: 800px; margin: 0; overflow: hidden; }
+    body { font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif; color: #111827; background: #0b1019; }
+    button { font: inherit; }
+    .browser { position: absolute; inset: 0; background: #fff; }
+    .tabs { height: 40px; display: flex; align-items: end; gap: 6px; padding: 0 10px; background: #dce9fd; }
+    .tab { width: 228px; height: 34px; display: flex; align-items: center; gap: 10px; padding: 0 13px; border-radius: 12px 12px 0 0; background: #f8fafc; font-size: 12px; white-space: nowrap; }
+    .tab.inactive { background: #cbdcf6; }
+    .tab .favicon { display: inline-grid; place-items: center; width: 17px; height: 17px; border-radius: 5px; background: #1664d9; color: white; font-size: 11px; font-weight: bold; }
+    .tab .close { margin-left: auto; color: #5e6b80; font-size: 17px; }
+    .tab-add { align-self: center; margin: 0 0 2px 6px; color: #526075; font-size: 20px; }
+    .window-buttons { margin-left: auto; align-self: center; display: flex; gap: 24px; padding: 0 12px; color: #30435e; font-size: 18px; }
+    .toolbar { height: 50px; display: flex; align-items: center; gap: 17px; padding: 0 17px; background: #fff; color: #475569; }
+    .nav-icon { display: grid; place-items: center; width: 17px; font-size: 20px; line-height: 1; }
+    .address { height: 34px; flex: 1; display: flex; align-items: center; gap: 11px; padding: 0 14px; border-radius: 19px; background: #eef3fb; color: #182334; font-size: 14px; }
+    .address .secure { color: #42754a; font-size: 14px; }
+    .address .star { margin-left: auto; color: #687789; font-size: 22px; }
+    .tool-icon { display: grid; place-items: center; width: 23px; height: 27px; font-size: 19px; }
+    .tool-icon.extension { width: 32px; height: 32px; border-radius: 9px; background: #e8effa; }
+    .tool-icon.extension img { width: 21px; height: 21px; object-fit: contain; }
+    .tool-icon.puzzle { font-size: 23px; }
+    .tool-icon.more { font-weight: bold; }
+    .bookmark { height: 29px; display: flex; align-items: center; gap: 26px; padding: 0 18px; border-bottom: 1px solid #e6e9ee; background: #fff; color: #475569; font-size: 12px; }
+    .bookmark span::before { content: "▱"; margin-right: 6px; color: #718096; }
+    .site { position: absolute; top: 119px; bottom: 0; width: 100%; display: flex; background: #0d1420; color: #eaf1f9; }
+    .sidebar { width: 181px; flex: none; padding: 24px 15px; background: #0c111a; border-right: 1px solid #273246; }
+    .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 31px; font-size: 16px; font-weight: 700; }
+    .brandmark { width: 29px; height: 29px; border-radius: 8px; display: grid; place-items: center; background: #246fe2; color: white; font-size: 18px; }
+    .nav-item { height: 39px; padding: 10px 12px; margin-bottom: 4px; border-radius: 8px; color: #aab8ca; font-size: 13px; }
+    .nav-item.selected { background: #182a48; color: #82b8ff; }
+    .main { flex: 1; min-width: 0; padding: 24px 31px; }
+    .site-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 26px; }
+    .site-top strong { font-size: 23px; letter-spacing: -.02em; }
+    .search { width: 222px; height: 34px; display: flex; align-items: center; padding: 0 14px; border: 1px solid #2b3850; border-radius: 9px; color: #8c9caf; background: #151f2e; font-size: 13px; }
+    .content-row { display: flex; gap: 24px; }
+    .video-column { width: 779px; }
+    .video-heading { margin-bottom: 15px; }
+    .video-heading b { display: block; margin-bottom: 5px; font-size: 17px; }
+    .video-heading span { color: #8c9caf; font-size: 13px; }
+    .player { position: relative; width: 779px; height: 438px; overflow: hidden; border-radius: 13px; background: #060b15; box-shadow: 0 14px 40px #0005; }
+    .player .art { position: absolute; inset: 0; }
+    .related { flex: 1; padding-top: 34px; }
+    .related-title { margin-bottom: 16px; color: #cbd5e1; font-size: 14px; font-weight: bold; }
+    .related-card { height: 88px; display: flex; align-items: center; gap: 10px; padding: 8px; margin-bottom: 10px; border: 1px solid #26354a; border-radius: 11px; background: #121c2b; }
+    .related-thumb { width: 90px; height: 58px; flex: none; border-radius: 7px; background: linear-gradient(140deg,#174b80 0%,#538ab0 47%,#d49760 48%,#273c56 100%); }
+    .related-lines { flex: 1; }
+    .related-lines i { display: block; width: 100%; height: 8px; margin-bottom: 10px; border-radius: 6px; background: #32435b; }
+    .related-lines i:last-child { width: 66%; background: #26354a; }
+    .art { width: 100%; height: 100%; }
+    .art svg { width: 100%; height: 100%; display: block; }
+    .controls { position: absolute; left: 14px; right: 14px; bottom: 12px; height: 43px; display: flex; align-items: center; gap: 12px; padding: 0 14px; border: 1px solid #ffffff28; border-radius: 25px; background: #111a26ce; color: white; font-size: 12px; backdrop-filter: blur(7px); }
+    .controls .play { width: 18px; font-size: 15px; }
+    .controls .progress { flex: 1; height: 4px; overflow: hidden; border-radius: 3px; background: #ffffff4a; }
+    .controls .progress::before { content: ""; display: block; width: 29%; height: 4px; background: #fff; }
+    .controls .ico { font-size: 17px; line-height: 1; }
+    .menu { position: absolute; top: 80px; right: 63px; width: 334px; padding: 16px 13px 12px; border: 1px solid #dce1e8; border-radius: 16px; background: white; box-shadow: 0 14px 40px #0004; }
+    .menu-title { display: flex; align-items: center; justify-content: space-between; padding: 0 8px 12px; font-size: 16px; font-weight: 600; }
+    .menu-title span:last-child { font-size: 21px; font-weight: 400; color: #667085; }
+    .menu-sub { padding: 2px 8px 9px; color: #64748b; font-size: 12px; }
+    .menu-row { display: flex; align-items: center; gap: 11px; height: 46px; padding: 0 9px; border-radius: 8px; font-size: 13px; }
+    .menu-row.highlight { background: #eaf2ff; border: 1px solid #b8d3ff; }
+    .menu-row img { width: 20px; height: 20px; object-fit: contain; }
+    .menu-row .row-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .menu-row .pin { color: #687789; font-size: 18px; }
+    .menu-row .dots { color: #64748b; font-size: 20px; }
+    .menu-note { margin: 11px 8px 1px; padding-top: 12px; border-top: 1px solid #e7ebf1; color: #64748b; font-size: 12px; }
+    .popup { position: absolute; top: 81px; right: 64px; width: 300px; border: 1px solid #dce1e8; border-radius: 10px; background: #fff; box-shadow: 0 16px 35px #0004; color: #0f172a; font: 13px/1.5 system-ui, "Microsoft YaHei", "PingFang SC", sans-serif; }
+    .popup header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 6px; }
+    .popup h1 { margin: 0; font-size: 14px; }
+    .popup .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    .status { margin: 0 14px 10px; min-height: 1.5em; color: #64748b; }
+    .act { display: block; width: calc(100% - 28px); margin: 0 14px 8px; padding: 9px 12px; text-align: left; border: 1px solid #cbd5e1; border-radius: 10px; background: #f8fafc; color: inherit; }
+    .act b { display: block; font-size: 14px; }
+    .act small { color: #64748b; }
+    .opts { padding: 2px 14px 6px; display: flex; flex-direction: column; gap: 4px; }
+    .opts label { display: flex; align-items: center; gap: 6px; }
+    .opts input { width: 13px; height: 13px; margin: 0; accent-color: #1c64e7; }
+    .hint { margin: 0; padding: 8px 14px 12px; color: #94a3b8; font-size: 12px; }
+    .fullscreen { position: absolute; inset: 0; display: grid; place-items: center; background: #02060d; }
+    .fullscreen.web { top: 119px; }
+    .fullscreen .wide-art { position: relative; width: 100%; aspect-ratio: 16/9; max-height: 100%; }
+    .fullscreen.web .wide-art { width: auto; height: 100%; }
+    .fullscreen .controls { left: 18px; right: 18px; bottom: 10px; }
+    .fullscreen.web .controls { bottom: 10px; }
+    .fullscreen .tip { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); padding: 7px 13px; border-radius: 6px; background: #0a1321a8; color: #e5e7eb; font-size: 12px; white-space: nowrap; }
+    .fullscreen .tip kbd { display: inline-block; margin-left: 4px; padding: 2px 5px; border: 1px solid #bbc5d3; border-radius: 3px; font: inherit; }
+  </style>
+</head>
+<body>
+  <div class="browser" id="browser">
+    <div class="tabs"><div class="tab inactive"><span class="favicon">▶</span><span id="other-tab"></span><span class="close">×</span></div><div class="tab"><span class="favicon">▶</span><span id="active-tab"></span><span class="close">×</span></div><span class="tab-add">+</span><div class="window-buttons"><span>−</span><span>□</span><span>×</span></div></div>
+    <div class="toolbar"><span class="nav-icon">‹</span><span class="nav-icon">›</span><span class="nav-icon" style="font-size:17px">⟳</span><span class="nav-icon" style="font-size:16px">⌂</span><div class="address"><span class="secure">⌕</span><span>video.example/watch/demo</span><span class="star">☆</span></div><span class="tool-icon extension"><img src="../icons/icon32.png"></span><span class="tool-icon puzzle">♧</span><span class="tool-icon more">⋮</span></div>
+    <div class="bookmark"><span id="bookmark-1"></span><span id="bookmark-2"></span><span id="bookmark-3"></span></div>
+    <div class="site"><aside class="sidebar"><div class="brand"><span class="brandmark">▶</span><span id="site-brand"></span></div><div class="nav-item selected" id="nav-1"></div><div class="nav-item" id="nav-2"></div><div class="nav-item" id="nav-3"></div></aside><main class="main"><div class="site-top"><strong id="site-title"></strong><div class="search" id="search"></div></div><div class="content-row"><div class="video-column"><div class="video-heading"><b id="video-title"></b><span id="video-subtitle"></span></div><div class="player"><div class="art"></div><div class="controls"></div></div></div><div class="related"><div class="related-title" id="related-title"></div><div class="related-card"><div class="related-thumb"></div><div class="related-lines"><i></i><i></i></div></div><div class="related-card"><div class="related-thumb" style="filter:hue-rotate(45deg)"></div><div class="related-lines"><i></i><i></i></div></div><div class="related-card"><div class="related-thumb" style="filter:hue-rotate(-35deg)"></div><div class="related-lines"><i></i><i></i></div></div></div></div></main></div>
+  </div>
+  <div class="menu" id="menu" hidden><div class="menu-title"><span id="menu-title"></span><span>×</span></div><div class="menu-sub" id="menu-sub"></div><div class="menu-row highlight"><img src="../icons/icon32.png"><span class="row-name" id="menu-name"></span><span class="pin">♙</span><span class="dots">⋮</span></div><div class="menu-note" id="menu-note"></div></div>
+  <div class="popup" id="popup" hidden><header><h1 id="popup-title"></h1><span class="dot"></span></header><p class="status" id="status"></p><button class="act"><b id="web-label"></b><small id="web-sub"></small></button><button class="act"><b id="full-label"></b><small id="full-sub"></small></button><div class="opts"><label><input type="checkbox" checked><span id="native"></span></label><label><input type="checkbox"><span id="fill"></span></label></div><p class="hint"><span id="shortcuts"></span><br><span id="esc"></span></p></div>
+  <div class="fullscreen" id="fullscreen" hidden><div class="wide-art art"></div><div class="controls"></div><div class="tip" id="tip"></div></div>
+  <template id="landscape"><svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#132c56"/><stop offset=".51" stop-color="#547da4"/><stop offset=".83" stop-color="#dda77c"/><stop offset="1" stop-color="#f5c394"/></linearGradient><radialGradient id="glow"><stop stop-color="#fff4ce" stop-opacity=".95"/><stop offset=".26" stop-color="#f7c8a5" stop-opacity=".34"/><stop offset="1" stop-color="#f7c8a5" stop-opacity="0"/></radialGradient><linearGradient id="lake" x2="0" y2="1"><stop stop-color="#6987a2"/><stop offset="1" stop-color="#172b48"/></linearGradient></defs><rect width="1280" height="720" fill="url(#sky)"/><ellipse cx="645" cy="332" rx="390" ry="270" fill="url(#glow)"/><circle cx="647" cy="325" r="59" fill="#ffe8c3" opacity=".9"/><path d="M0 484 130 375 213 442 355 293 488 454 640 339 770 468 895 320 1044 451 1176 374 1280 467v253H0Z" fill="#405473"/><path d="M0 510 190 435 310 478 485 384 612 493 774 414 951 497 1129 420 1280 493v227H0Z" fill="#253b5d"/><path d="M0 525Q310 513 640 533t640-3v190H0Z" fill="url(#lake)"/><path d="M420 551q225 13 450 0" stroke="#f7c59c" stroke-opacity=".42" stroke-width="3" fill="none"/><path d="M455 579q180 11 380 0M505 615q145 8 310 0" stroke="#ffe2b3" stroke-opacity=".24" stroke-width="2" fill="none"/><path d="M0 600q190-58 367-24L240 720H0Zm1280 0q-190-58-367-24l127 144h240Z" fill="#142b40"/><path d="M0 653q118-38 211-17l-69 84H0Zm1280 0q-118-38-211-17l69 84h142Z" fill="#0e2536"/></svg></template>
+  <script>
+    const data = {
+      zh: {name:'视频全屏助手',otherTab:'新标签页',activeTab:'演示视频',bookmark:['示例','视频','收藏'],siteBrand:'视频演示',nav:['正在播放','视频列表','稍后观看'],siteTitle:'演示视频',search:'搜索视频',videoTitle:'示例视频画面',videoSubtitle:'用于展示全屏效果的虚构画面',related:'接下来播放',menuTitle:'扩展程序',menuSub:'可访问此网站的扩展程序',menuNote:'管理扩展程序',status:'检测到 1 个视频',web:'网页全屏',webSub:'视频占满当前窗口，浏览器不全屏',full:'整个全屏',fullSub:'浏览器进入全屏，视频占满整个屏幕',native:'显示原生控制条（直接改视频时）',fill:'拉伸铺满窗口（可能变形）',shortcuts:'快捷键默认未设置，可在 chrome://extensions/shortcuts 自行绑定',esc:'网页全屏 / 整个全屏 · 页面内按 Esc 退出',tipWeb:'已网页全屏 · Esc 退出',tipFull:'已整个全屏 · Esc 退出'},
+      en: {name:'Video Fullscreen Helper',otherTab:'New tab',activeTab:'Demo video',bookmark:['Examples','Videos','Saved'],siteBrand:'Video Demo',nav:['Now playing','Video library','Watch later'],siteTitle:'Demo video',search:'Search videos',videoTitle:'Sample video scene',videoSubtitle:'A fictional scene for demonstrating fullscreen',related:'Up next',menuTitle:'Extensions',menuSub:'Extensions that can access this site',menuNote:'Manage extensions',status:'Found 1 video(s)',web:'Web fullscreen',webSub:'Video fills the window; the browser stays windowed',full:'Fullscreen',fullSub:'The browser enters fullscreen and the video fills the screen',native:'Show native controls (when targeting the video directly)',fill:'Stretch to fill the window (may distort)',shortcuts:'Shortcuts are unbound by default — set them at chrome://extensions/shortcuts',esc:'Web fullscreen / Fullscreen · Press Esc in the page to exit',tipWeb:'Web fullscreen · Esc to exit',tipFull:'Fullscreen · Esc to exit'}
+    };
+    const params = new URLSearchParams(location.search), lang = params.get('lang') === 'zh' ? 'zh' : 'en', step = Number(params.get('step') || 1), t = data[lang];
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    const put=(id,v)=>document.getElementById(id).textContent=v;
+    put('other-tab',t.otherTab);put('active-tab',t.activeTab);for(let i=0;i<3;i++){put('bookmark-'+(i+1),t.bookmark[i]);put('nav-'+(i+1),t.nav[i]);}put('site-brand',t.siteBrand);put('site-title',t.siteTitle);put('search',t.search);put('video-title',t.videoTitle);put('video-subtitle',t.videoSubtitle);put('related-title',t.related);
+    put('menu-title',t.menuTitle);put('menu-sub',t.menuSub);put('menu-name',t.name);put('menu-note',t.menuNote);put('popup-title',t.name);put('status',t.status);put('web-label',t.web);put('web-sub',t.webSub);put('full-label',t.full);put('full-sub',t.fullSub);put('native',t.native);put('fill',t.fill);put('shortcuts',t.shortcuts);put('esc',t.esc);
+    const controls = '<span class="play">▶</span><span>❚❚</span><span class="ico">◖))</span><span>01:24</span><span class="progress"></span><span>04:30</span><span class="ico">⚙</span><span class="ico">⛶</span>';
+    document.querySelectorAll('.controls').forEach(x=>x.innerHTML=controls);
+    document.querySelectorAll('.art').forEach(x=>x.innerHTML=document.getElementById('landscape').innerHTML);
+    if(step===1)document.getElementById('menu').hidden=false;
+    if(step===2)document.getElementById('popup').hidden=false;
+    if(step===3||step===4){const full=document.getElementById('fullscreen');full.hidden=false; if(step===3)full.classList.add('web'); else document.getElementById('browser').hidden=true;document.getElementById('tip').innerHTML=(step===3?t.tipWeb:t.tipFull).replace('Esc','<kbd>Esc</kbd>');}
+  </script>
+</body>
+</html>

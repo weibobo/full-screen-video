@@ -123,3 +123,5 @@ node tools/pack.js
 ## 📄 许可证
 
 [MIT](./LICENSE)
+
+**隐私** —— 本扩展不收集任何数据，见[隐私政策](https://weibobo.github.io/full-screen-video/)。

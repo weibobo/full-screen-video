@@ -126,3 +126,5 @@ Store listing copy (descriptions, permission justifications) lives in [`store/`]
 ## 📄 License
 
 [MIT](./LICENSE)
+
+**Privacy** — this extension collects no data. See the [privacy policy](https://weibobo.github.io/full-screen-video/).

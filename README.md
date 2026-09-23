@@ -4,10 +4,13 @@
 
 Force the video in the current tab to fill the window — no reliance on the site's own web-fullscreen button
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/agkkfbdanhjlnknonofjnkbelgeaebhm?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/video-fullscreen-helper/agkkfbdanhjlnknonofjnkbelgeaebhm)
 ![Chrome](https://img.shields.io/badge/Chrome-%E2%89%A5110-4285F4?logo=googlechrome&logoColor=white)
 ![Manifest](https://img.shields.io/badge/Manifest-V3-34A853)
 ![i18n](https://img.shields.io/badge/UI-English%20%7C%20%E4%B8%AD%E6%96%87-8B5CF6)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+
+**[➕ Install from the Chrome Web Store](https://chromewebstore.google.com/detail/video-fullscreen-helper/agkkfbdanhjlnknonofjnkbelgeaebhm)**
 
 **English** · [简体中文](./README.zh-CN.md)
 
@@ -33,7 +36,11 @@ Many video sites ship a broken "web fullscreen" button, leaving only real fullsc
 
 ## 📦 Installation
 
-> The extension is not on the Chrome Web Store; load it locally in developer mode.
+### From the Chrome Web Store (recommended)
+
+[**Install Video Fullscreen Helper**](https://chromewebstore.google.com/detail/video-fullscreen-helper/agkkfbdanhjlnknonofjnkbelgeaebhm)
+
+### From source (developer mode)
 
 1. Open `chrome://extensions/`
 2. Enable **Developer mode** (top right)

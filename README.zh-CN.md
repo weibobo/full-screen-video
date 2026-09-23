@@ -4,10 +4,13 @@
 
 **Video Fullscreen Helper** —— 把当前标签页里的视频强制铺满窗口，不依赖站点自带的网页全屏按钮
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/agkkfbdanhjlnknonofjnkbelgeaebhm?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/video-fullscreen-helper/agkkfbdanhjlnknonofjnkbelgeaebhm)
 ![Chrome](https://img.shields.io/badge/Chrome-%E2%89%A5110-4285F4?logo=googlechrome&logoColor=white)
 ![Manifest](https://img.shields.io/badge/Manifest-V3-34A853)
 ![i18n](https://img.shields.io/badge/%E7%95%8C%E9%9D%A2-%E4%B8%AD%E6%96%87%20%7C%20English-8B5CF6)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+
+**[➕ 从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/video-fullscreen-helper/agkkfbdanhjlnknonofjnkbelgeaebhm)**
 
 [English](./README.md) · **简体中文**
 
@@ -33,7 +36,11 @@
 
 ## 📦 安装
 
-> 本扩展未上架 Chrome 应用商店，以开发者模式加载本地使用。
+### 从 Chrome 应用商店安装（推荐）
+
+[**点击安装视频全屏助手**](https://chromewebstore.google.com/detail/video-fullscreen-helper/agkkfbdanhjlnknonofjnkbelgeaebhm)
+
+### 从源码加载（开发者模式）
 
 1. 打开 `chrome://extensions/`
 2. 打开右上角 **开发者模式**
